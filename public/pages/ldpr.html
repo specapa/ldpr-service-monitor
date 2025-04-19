@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЛДПР - Либерально-Демократическая Партия России</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0057b7 0%, #ffd700 100%);
+        }
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link:hover {
+            color: #ffd700 !important;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Шапка сайта -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Emblem_of_the_Liberal_Democratic_Party_of_Russia.svg/1200px-Emblem_of_the_Liberal_Democratic_Party_of_Russia.svg.png" 
+                         alt="Логотип ЛДПР" 
+                         class="h-16 mr-4">
+                    <div>
+                        <h1 class="text-2xl font-bold">ЛДПР</h1>
+                        <p class="text-sm">Либерально-Демократическая Партия России</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="bg-white text-blue-800 px-4 py-2 rounded-full font-semibold hover:bg-gray-100 transition">
+                        Вступить в партию
+                    </a>
+                    <button class="md:hidden text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Навигация -->
+            <nav class="hidden md:block mt-4">
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="nav-link text-white hover:text-yellow-300 font-medium transition">Главная</a></li>
+                    <li><a href="#" class="nav-link text-white hover:text-yellow-300 font-medium transition">О партии</a></li>
+                    <li><a href="#" class="nav-link text-white hover:text-yellow-300 font-medium transition">Новости</a></li>
+                    <li><a href="#" class="nav-link text-white hover:text-yellow-300 font-medium transition">Депутаты</a></li>
+                    <li><a href="#" class="nav-link text-white hover:text-yellow-300 font-medium transition">Программа</a></li>
+                    <li><a href="#" class="nav-link text-white hover:text-yellow-300 font-medium transition">Контакты</a></li>
+                    <li><a href="#" class="nav-link text-white hover:text-yellow-300 font-medium transition">Медиа</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="relative">
+        <div class="gradient-bg h-96 flex items-center">
+            <div class="container mx-auto px-4 text-white text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">За сильную и независимую Россию!</h2>
+                <p class="text-xl mb-8 max-w-3xl mx-auto">ЛДПР - партия патриотов, выступающая за справедливость, традиционные ценности и суверенитет нашей страны</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#" class="bg-yellow-400 text-blue-900 px-6 py-3 rounded-full font-bold hover:bg-yellow-300 transition">
+                        Подробнее о программе
+                    </a>
+                    <a href="#" class="bg-white text-blue-900 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition">
+                        Последние выступления
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-16 bg-white"></div>
+    </section>
+
+    <!-- Основной контент -->
+    <main class="container mx-auto px-4 py-8 -mt-8">
+        <!-- Быстрые ссылки -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
+            <a href="#" class="bg-white rounded-xl shadow-md p-6 flex items-center hover:shadow-lg transition">
+                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                    <i class="fas fa-newspaper text-blue-800 text-xl"></i>
+                </div>
+                <span class="font-medium">Новости партии</span>
+            </a>
+            <a href="#" class="bg-white rounded-xl shadow-md p-6 flex items-center hover:shadow-lg transition">
+                <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                    <i class="fas fa-calendar-alt text-yellow-800 text-xl"></i>
+                </div>
+                <span class="font-medium">Мероприятия</span>
+            </a>
+            <a href="#" class="bg-white rounded-xl shadow-md p-6 flex items-center hover:shadow-lg transition">
+                <div class="bg-red-100 p-3 rounded-full mr-4">
+                    <i class="fas fa-handshake text-red-800 text-xl"></i>
+                </div>
+                <span class="font-medium">Вступить в партию</span>
+            </a>
+            <a href="#" class="bg-white rounded-xl shadow-md p-6 flex items-center hover:shadow-lg transition">
+                <div class="bg-green-100 p-3 rounded-full mr-4">
+                    <i class="fas fa-comments text-green-800 text-xl"></i>
+                </div>
+                <span class="font-medium">Обратная связь</span>
+            </a>
+        </div>
+
+        <!-- Последние новости -->
+        <section class="mb-16">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800">Последние новости</h2>
+                <a href="#" class="text-blue-700 font-medium hover:underline">Все новости →</a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden news-card transition duration-300">
+                    <img src="https://ldpr.ru/upload/iblock/6e3/6e3c5a3a1c1a3d5b5e5a5a5a5a5a5a5.jpg" 
+                         alt="Новость 1" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-gray-500">12 июня 2023</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Заявление ЛДПР по ситуации с санкциями</h3>
+                        <p class="text-gray-600 mb-4">ЛДПР предлагает комплекс мер по защите российских предприятий от западных санкций...</p>
+                        <a href="#" class="text-blue-700 font-medium hover:underline">Читать далее</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden news-card transition duration-300">
+                    <img src="https://ldpr.ru/upload/iblock/4e3/4e3c5a3a1c1a3d5b5e5a5a5a5a5a5a5.jpg" 
+                         alt="Новость 2" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-gray-500">8 июня 2023</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Инициатива ЛДПР по поддержке многодетных семей</h3>
+                        <p class="text-gray-600 mb-4">Фракция ЛДПР в Госдуме внесла законопроект о расширении льгот для многодетных семей...</p>
+                        <a href="#" class="text-blue-700 font-medium hover:underline">Читать далее</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden news-card transition duration-300">
+                    <img src="https://ldpr.ru/upload/iblock/2e3/2e3c5a3a1c1a3d5b5e5a5a5a5a5a5a5.jpg" 
+                         alt="Новость 3" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-gray-500">5 июня 2023</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Встреча с избирателями в Ростове-на-Дону</h3>
+                        <p class="text-gray-600 mb-4">Депутаты ЛДПР провели серию встреч с жителями Ростовской области, обсудив актуальные проблемы региона...</p>
+                        <a href="#" class="text-blue-700 font-medium hover:underline">Читать далее</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Видео и трансляции -->
+        <section class="mb-16">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800">Видео и трансляции</h2>
+                <a href="#" class="text-blue-700 font-medium hover:underline">Все видео →</a>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Выступление Владимира Жириновского на заседании Госдумы</h3>
+                        <p class="text-gray-600">Полная версия выступления лидера ЛДПР на пленарном заседании Государственной Думы.</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-6">
+                        <div class="flex">
+                            <div class="w-1/3">
+                                <img src="https://ldpr.ru/upload/iblock/1e3/1e3c5a3a1c1a3d5b5e5a5a5a5a5a5a5.jpg" 
+                                     alt="Видео 2" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-2/3 p-4">
+                                <h3 class="font-bold mb-2">Пресс-конференция по итогам выборов</h3>
+                                <p class="text-sm text-gray-600 mb-2">15 мая 2023</p>
+                                <div class="flex items-center text-blue-700">
+                                    <i class="fas fa-play-circle mr-2"></i>
+                                    <span>Смотреть</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-6">
+                        <div class="flex">
+                            <div class="w-1/3">
+                                <img src="https://ldpr.ru/upload/iblock/3e3/3e3c5a3a1c1a3d5b5e5a5a5a5a5a5a5.jpg" 
+                                     alt="Видео 3" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-2/3 p-4">
+                                <h3 class="font-bold mb-2">Документальный фильм "30 лет ЛДПР"</h3>
+                                <p class="text-sm text-gray-600 mb-2">10 мая 2023</p>
+                                <div class="flex items-center text-blue-700">
+                                    <i class="fas fa-play-circle mr-2"></i>
+                                    <span>Смотреть</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="flex">
+                            <div class="w-1/3">
+                                <img src="https://ldpr.ru/upload/iblock/5e3/5e3c5a3a1c1a3d5b5e5a5a5a5a5a5a5.jpg" 
+                                     alt="Видео 4" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="w-2/3 p-4">
+                                <h3 class="font-bold mb-2">Интервью с депутатом ЛДПР</h3>
+                                <p class="text-sm text-gray-600 mb-2">5 мая 2023</p>
+                                <div class="flex items-center text-blue-700">
+                                    <i class="fas fa-play-circle mr-2"></i>
+                                    <span>Смотреть</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Интеграция сервисов -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Наши сервисы</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-md p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-users text-blue-800 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Партийная база</h3>
+                    <p class="text-gray-600 mb-4">Информационная система для членов партии с доступом к внутренним документам и сервисам</p>
+                    <a href="#" class="text-blue-700 font-medium hover:underline">Перейти →</a>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-hand-holding-heart text-yellow-800 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Прием обращений</h3>
+                    <p class="text-gray-600 mb-4">Отправьте ваше обращение к депутатам ЛДПР и получите официальный ответ</p>
+                    <a href="#" class="text-blue-700 font-medium hover:underline">Оставить обращение →</a>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-map-marked-alt text-red-800 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Региональные отделения</h3>
+                    <p class="text-gray-600 mb-4">Найдите ближайшее отделение ЛДПР в вашем регионе и контакты для связи</p>
+                    <a href="#" class="text-blue-700 font-medium hover:underline">Найти отделение →</a>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-book text-green-800 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Библиотека ЛДПР</h3>
+                    <p class="text-gray-600 mb-4">Электронная библиотека с книгами, статьями и выступлениями лидеров партии</p>
+                    <a href="#" class="text-blue-700 font-medium hover:underline">Открыть библиотеку →</a>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-graduation-cap text-purple-800 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Партийная школа</h3>
+                    <p class="text-gray-600 mb-4">Обучающие программы и курсы для членов партии и активистов</p>
+                    <a href="#" class="text-blue-700 font-medium hover:underline">Узнать больше →</a>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shopping-bag text-pink-800 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Партийная атрибутика</h3>
+                    <p class="text-gray-600 mb-4">Официальный магазин с символикой ЛДПР: флаги, значки, книги и сувениры</p>
+                    <a href="#" class="text-blue-700 font-medium hover:underline">Перейти в магазин →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Подписаться на рассылку -->
+        <section class="gradient-bg text-white rounded-xl shadow-xl p-8 mb-16">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4">Будьте в курсе событий</h2>
+                <p class="text-xl mb-8">Подпишитесь на нашу рассылку и получайте самые важные новости ЛДПР прямо на вашу почту</p>
+                
+                <form class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+                    <input type="email" 
+                           placeholder="Ваш email" 
+                           class="flex-grow px-4 py-3 rounded-full focus:outline-none text-gray-800">
+                    <button type="submit" 
+                            class="bg-yellow-400 text-blue-900 px-6 py-3 rounded-full font-bold hover:bg-yellow-300 transition whitespace-nowrap">
+                        Подписаться
+                    </button>
+                </form>
+                
+                <p class="text-sm mt-4 opacity-80">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">ЛДПР</h3>
+                    <p class="mb-4">Либерально-Демократическая Партия России - партия патриотов, выступающая за сильную и независимую Россию.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-vk text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-odnoklassniki text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Разделы</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">О партии</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Программа</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Депутаты</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Новости</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Мероприятия</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Сервисы</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Вступить в партию</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Оставить обращение</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Партийная школа</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Партийная атрибутика</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Библиотека ЛДПР</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-gray-400"></i>
+                            <span class="text-gray-400">107045, Москва, Луков пер., д. 9</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-gray-400"></i>
+                            <span class="text-gray-400">+7 (495) 785-58-58</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-gray-400"></i>
+                            <span class="text-gray-400">info@ldpr.ru</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2023 ЛДПР. Все права защищены.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">Политика конфиденциальности</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        document.querySelector('.md\\:hidden').addEventListener('click', function() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('block');
+        });
+
+        // Анимация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.news-card, [class*="hover:shadow-lg"]');
+            elements.forEach(el => {
+                el.style.transition = 'all 0.3s ease';
+            });
+        });
+    </script>
+</body>
+</html>

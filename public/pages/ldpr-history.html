@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История ЛДПР | Официальный сайт</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ldpr: {
+                            blue: '#0054A6',
+                            light: '#E6F0FA',
+                            dark: '#003366',
+                            accent: '#FFD700'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #0054A6;
+            border: 3px solid #FFD700;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #0054A6;
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.03);
+        }
+        
+        .section-divider {
+            position: relative;
+            height: 80px;
+            overflow: hidden;
+        }
+        
+        .section-divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(135deg, #0054A6 0%, #003366 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-item::before {
+                left: -20px;
+            }
+            
+            .timeline::before {
+                left: -16px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://ldpr.ru/upload/logo.png" alt="ЛДПР" class="h-12 mr-3">
+                <div>
+                    <h1 class="text-xl font-bold text-ldpr-blue">ЛДПР</h1>
+                    <p class="text-xs text-gray-600">Либерально-Демократическая Партия России</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-700 hover:text-ldpr-blue font-medium transition">О партии</a>
+                <a href="#history" class="text-gray-700 hover:text-ldpr-blue font-medium transition">История</a>
+                <a href="#leaders" class="text-gray-700 hover:text-ldpr-blue font-medium transition">Лидеры</a>
+                <a href="#achievements" class="text-gray-700 hover:text-ldpr-blue font-medium transition">Достижения</a>
+                <a href="#principles" class="text-gray-700 hover:text-ldpr-blue font-medium transition">Принципы</a>
+            </nav>
+            <button class="md:hidden text-ldpr-blue">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-ldpr-blue text-white overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-30"></div>
+        <div class="container mx-auto px-4 py-32 relative z-10 text-center animate-fade-in">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-slide-up">История ЛДПР</h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8 animate-slide-up animation-delay-100">Три десятилетия борьбы за интересы России и её граждан</p>
+            <a href="#history" class="inline-block bg-ldpr-accent text-ldpr-dark font-bold px-8 py-3 rounded-full hover:bg-yellow-500 transition animate-slide-up animation-delay-200">
+                Изучить историю
+                <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-20 bg-white"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-ldpr-blue mb-4">О партии ЛДПР</h2>
+                <div class="w-24 h-1 bg-ldpr-accent mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">Либерально-демократическая партия России — одна из старейших политических партий современной России, основанная в 1989 году.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-ldpr-light p-8 rounded-xl hover-scale transition-all duration-300">
+                    <div class="text-ldpr-blue text-4xl mb-4">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-ldpr-dark">Идеология</h3>
+                    <p class="text-gray-600">Сочетание либеральных ценностей и патриотизма, защита национальных интересов России при сохранении демократических свобод.</p>
+                </div>
+                
+                <div class="bg-ldpr-light p-8 rounded-xl hover-scale transition-all duration-300">
+                    <div class="text-ldpr-blue text-4xl mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-ldpr-dark">Членство</h3>
+                    <p class="text-gray-600">Более 200 тысяч членов по всей России, разветвлённая сеть региональных отделений во всех субъектах РФ.</p>
+                </div>
+                
+                <div class="bg-ldpr-light p-8 rounded-xl hover-scale transition-all duration-300">
+                    <div class="text-ldpr-blue text-4xl mb-4">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-ldpr-dark">Представительство</h3>
+                    <p class="text-gray-600">Фракция ЛДПР в Государственной Думе, представители в региональных парламентах и органах местного самоуправления.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-ldpr-blue mb-4">История ЛДПР</h2>
+                <div class="w-24 h-1 bg-ldpr-accent mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">Ключевые вехи становления и развития партии с момента основания до наших дней.</p>
+            </div>
+            
+            <div class="relative pl-8 md:pl-16 timeline max-w-4xl mx-auto">
+                <!-- Timeline Item -->
+                <div class="relative pb-12 timeline-item">
+                    <div class="bg-white p-6 rounded-xl shadow-md hover-scale">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-ldpr-blue text-white text-sm font-bold px-3 py-1 rounded-full">1989</span>
+                            <h3 class="text-xl font-bold ml-4 text-ldpr-dark">Основание партии</h3>
+                        </div>
+                        <p class="text-gray-600">13 декабря 1989 года создана Либерально-демократическая партия Советского Союза (ЛДПСС) — первая оппозиционная партия в СССР.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item -->
+                <div class="relative pb-12 timeline-item">
+                    <div class="bg-white p-6 rounded-xl shadow-md hover-scale">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-ldpr-blue text-white text-sm font-bold px-3 py-1 rounded-full">1991</span>
+                            <h3 class="text-xl font-bold ml-4 text-ldpr-dark">Регистрация</h3>
+                        </div>
+                        <p class="text-gray-600">12 апреля 1991 года ЛДПСС стала первой партией, официально зарегистрированной Министерством юстиции СССР.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item -->
+                <div class="relative pb-12 timeline-item">
+                    <div class="bg-white p-6 rounded-xl shadow-md hover-scale">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-ldpr-blue text-white text-sm font-bold px-3 py-1 rounded-full">1993</span>
+                            <h3 class="text-xl font-bold ml-4 text-ldpr-dark">Первые выборы</h3>
+                        </div>
+                        <p class="text-gray-600">На выборах в Государственную Думу в 1993 году ЛДПР получила 22,92% голосов, заняв первое место по партийным спискам.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item -->
+                <div class="relative pb-12 timeline-item">
+                    <div class="bg-white p-6 rounded-xl shadow-md hover-scale">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-ldpr-blue text-white text-sm font-bold px-3 py-1 rounded-full">2000-е</span>
+                            <h3 class="text-xl font-bold ml-4 text-ldpr-dark">Становление</h3>
+                        </div>
+                        <p class="text-gray-600">В 2000-х годах ЛДПР укрепила свои позиции как системная оппозиция, последовательно получая представительство в Госдуме.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item -->
+                <div class="relative pb-12 timeline-item">
+                    <div class="bg-white p-6 rounded-xl shadow-md hover-scale">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-ldpr-blue text-white text-sm font-bold px-3 py-1 rounded-full">2010-е</span>
+                            <h3 class="text-xl font-bold ml-4 text-ldpr-dark">Развитие</h3>
+                        </div>
+                        <p class="text-gray-600">В этот период ЛДПР активно участвовала в формировании политической повестки, предлагая альтернативные решения по ключевым вопросам.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item -->
+                <div class="relative timeline-item">
+                    <div class="bg-white p-6 rounded-xl shadow-md hover-scale">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-ldpr-blue text-white text-sm font-bold px-3 py-1 rounded-full">2020-е</span>
+                            <h3 class="text-xl font-bold ml-4 text-ldpr-dark">Современный этап</h3>
+                        </div>
+                        <p class="text-gray-600">ЛДПР продолжает оставаться важной частью политической системы России, защищая национальные интересы и права граждан.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaders Section -->
+    <section id="leaders" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-ldpr-blue mb-4">Лидеры ЛДПР</h2>
+                <div class="w-24 h-1 bg-ldpr-accent mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">Выдающиеся личности, которые внесли значительный вклад в развитие партии.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Leader 1 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover-scale transition-all duration-300">
+                    <div class="h-64 bg-ldpr-blue flex items-center justify-center">
+                        <img src="https://ldpr.ru/upload/iblock/1e0/1e0e3d5b6f8c7a9b0d1e2f3a4b5c6d7.jpg" alt="Владимир Жириновский" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-ldpr-dark">Владимир Жириновский</h3>
+                        <p class="text-gray-500 mb-3">Основатель и бессменный лидер (1989-2022)</p>
+                        <p class="text-gray-600">Яркий политик, доктор философских наук, под руководством которого ЛДПР стала одной из ведущих политических сил России.</p>
+                        <div class="mt-4 flex space-x-3">
+                            <a href="#" class="text-ldpr-blue hover:text-ldpr-dark">
+                                <i class="fab fa-wikipedia-w"></i>
+                            </a>
+                            <a href="#" class="text-ldpr-blue hover:text-ldpr-dark">
+                                <i class="fas fa-book"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Leader 2 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover-scale transition-all duration-300">
+                    <div class="h-64 bg-ldpr-blue flex items-center justify-center">
+                        <img src="https://ldpr.ru/upload/iblock/9a9/9a9e8b7c6d5e4f3a2b1c0d9e8f7a6b5.jpg" alt="Леонид Слуцкий" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-ldpr-dark">Леонид Слуцкий</h3>
+                        <p class="text-gray-500 mb-3">Председатель ЛДПР (с 2022 года)</p>
+                        <p class="text-gray-600">Доктор политических наук, депутат Госдумы с 1999 года, продолживший курс партии после ухода Жириновского.</p>
+                        <div class="mt-4 flex space-x-3">
+                            <a href="#" class="text-ldpr-blue hover:text-ldpr-dark">
+                                <i class="fab fa-wikipedia-w"></i>
+                            </a>
+                            <a href="#" class="text-ldpr-blue hover:text-ldpr-dark">
+                                <i class="fas fa-book"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Leader 3 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover-scale transition-all duration-300">
+                    <div class="h-64 bg-ldpr-blue flex items-center justify-center">
+                        <img src="https://ldpr.ru/upload/iblock/3d2/3d2c1b0a9f8e7d6c5b4a3c2d1e0f9a8.jpg" alt="Алексей Островский" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-ldpr-dark">Алексей Островский</h3>
+                        <p class="text-gray-500 mb-3">Губернатор Смоленской области</p>
+                        <p class="text-gray-600">Один из самых успешных региональных лидеров от ЛДПР, возглавляющий Смоленскую область с 2012 года.</p>
+                        <div class="mt-4 flex space-x-3">
+                            <a href="#" class="text-ldpr-blue hover:text-ldpr-dark">
+                                <i class="fab fa-wikipedia-w"></i>
+                            </a>
+                            <a href="#" class="text-ldpr-blue hover:text-ldpr-dark">
+                                <i class="fas fa-book"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-20 bg-ldpr-blue text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Достижения ЛДПР</h2>
+                <div class="w-24 h-1 bg-ldpr-accent mx-auto mb-6"></div>
+                <p class="text-lg max-w-4xl mx-auto">Значимые результаты работы партии на благо России и её граждан.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-ldpr-dark p-6 rounded-xl text-center hover-scale">
+                    <div class="text-5xl font-bold mb-3 text-ldpr-accent">30+</div>
+                    <h3 class="text-xl font-bold mb-2">Лет истории</h3>
+                    <p class="text-gray-300">Успешной работы в политике</p>
+                </div>
+                
+                <div class="bg-ldpr-dark p-6 rounded-xl text-center hover-scale">
+                    <div class="text-5xl font-bold mb-3 text-ldpr-accent">7</div>
+                    <h3 class="text-xl font-bold mb-2">Созывов Госдумы</h3>
+                    <p class="text-gray-300">С участием фракции ЛДПР</p>
+                </div>
+                
+                <div class="bg-ldpr-dark p-6 rounded-xl text-center hover-scale">
+                    <div class="text-5xl font-bold mb-3 text-ldpr-accent">500+</div>
+                    <h3 class="text-xl font-bold mb-2">Законопроектов</h3>
+                    <p class="text-gray-300">Внесено за все годы работы</p>
+                </div>
+                
+                <div class="bg-ldpr-dark p-6 rounded-xl text-center hover-scale">
+                    <div class="text-5xl font-bold mb-3 text-ldpr-accent">85</div>
+                    <h3 class="text-xl font-bold mb-2">Регионов</h3>
+                    <p class="text-gray-300">С региональными отделениями</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 grid md:grid-cols-2 gap-8">
+                <div class="bg-white bg-opacity-10 p-8 rounded-xl backdrop-filter backdrop-blur-sm hover-scale">
+                    <h3 class="text-xl font-bold mb-4">Законодательные инициативы</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-ldpr-accent mt-1 mr-3"></i>
+                            <span>Инициативы по поддержке семьи и детства</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-ldpr-accent mt-1 mr-3"></i>
+                            <span>Предложения по укреплению обороноспособности</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-ldpr-accent mt-1 mr-3"></i>
+                            <span>Проекты по развитию экономики и поддержке бизнеса</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-8 rounded-xl backdrop-filter backdrop-blur-sm hover-scale">
+                    <h3 class="text-xl font-bold mb-4">Общественная деятельность</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-ldpr-accent mt-1 mr-3"></i>
+                            <span>Благотворительные программы по всей стране</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-ldpr-accent mt-1 mr-3"></i>
+                            <span>Поддержка ветеранов и социально незащищённых групп</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-ldpr-accent mt-1 mr-3"></i>
+                            <span>Молодёжные и образовательные проекты</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Principles Section -->
+    <section id="principles" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-ldpr-blue mb-4">Принципы ЛДПР</h2>
+                <div class="w-24 h-1 bg-ldpr-accent mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">Основополагающие идеи, на которых строится деятельность партии.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="border border-ldpr-light rounded-xl p-6 hover:border-ldpr-blue transition hover-scale">
+                    <div class="text-ldpr-blue text-3xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-ldpr-dark">Суверенитет</h3>
+                    <p class="text-gray-600">Независимость России во внешней политике и экономике как абсолютный приоритет.</p>
+                </div>
+                
+                <div class="border border-ldpr-light rounded-xl p-6 hover:border-ldpr-blue transition hover-scale">
+                    <div class="text-ldpr-blue text-3xl mb-4">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-ldpr-dark">Справедливость</h3>
+                    <p class="text-gray-600">Равные возможности для всех граждан вне зависимости от происхождения.</p>
+                </div>
+                
+                <div class="border border-ldpr-light rounded-xl p-6 hover:border-ldpr-blue transition hover-scale">
+                    <div class="text-ldpr-blue text-3xl mb-4">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-ldpr-dark">Социальная защита</h3>
+                    <p class="text-gray-600">Гарантии достойного уровня жизни для пенсионеров, инвалидов, многодетных семей.</p>
+                </div>
+                
+                <div class="border border-ldpr-light rounded-xl p-6 hover:border-ldpr-blue transition hover-scale">
+                    <div class="text-ldpr-blue text-3xl mb-4">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-ldpr-dark">Развитие</h3>
+                    <p class="text-gray-600">Инвестиции в образование, науку и технологии как основу будущего страны.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Archive Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-ldpr-blue mb-4">Архивные материалы</h2>
+                <div class="w-24 h-1 bg-ldpr-accent mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">Исторические документы, фотографии и видео из истории партии.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="relative group overflow-hidden rounded-xl h-64 hover-scale">
+                    <img src="https://ldpr.ru/upload/iblock/7a6/7a6e5d4c3b2a1908f7e6d5c4b3a2c1d.jpg" alt="Учредительный съезд" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Учредительный съезд</h3>
+                            <p class="text-gray-200">1990 год</p>
+                            <button class="mt-3 bg-ldpr-accent text-ldpr-dark px-4 py-2 rounded-full text-sm font-bold">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative group overflow-hidden rounded-xl h-64 hover-scale">
+                    <img src="https://ldpr.ru/upload/iblock/2c1/2c1d3e4f5a6b7c8d9e0f1a2b3c4d5e6.jpg" alt="Выборы 1993" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Выборы 1993 года</h3>
+                            <p class="text-gray-200">Первая победа</p>
+                            <button class="mt-3 bg-ldpr-accent text-ldpr-dark px-4 py-2 rounded-full text-sm font-bold">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative group overflow-hidden rounded-xl h-64 hover-scale">
+                    <img src="https://ldpr.ru/upload/iblock/9b8/9b8a7c6d5e4f3a2b1c0d9e8f7a6b5c4.jpg" alt="Современные мероприятия" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                        <div class="text-center p-4">
+                            <h3 class="text-white text-xl font-bold mb-2">Современные мероприятия</h3>
+                            <p class="text-gray-200">2020-е годы</p>
+                            <button class="mt-3 bg-ldpr-accent text-ldpr-dark px-4 py-2 rounded-full text-sm font-bold">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="border-2 border-ldpr-blue text-ldpr-blue font-bold px-8 py-3 rounded-full hover:bg-ldpr-blue hover:text-white transition">
+                    Весь архив
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-ldpr-dark text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Хотите узнать больше о ЛДПР?</h2>
+            <p class="text-xl max-w-3xl mx-auto mb-8">Подпишитесь на нашу рассылку, чтобы получать новости о деятельности партии и исторические материалы.</p>
+            
+            <form class="max-w-xl mx-auto flex flex-col md:flex-row gap-3">
+                <input type="email" placeholder="Ваш email" class="flex-grow px-4 py-3 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-ldpr-accent">
+                <button type="submit" class="bg-ldpr-accent text-ldpr-dark font-bold px-6 py-3 rounded-full hover:bg-yellow-500 transition whitespace-nowrap">
+                    Подписаться
+                    <i class="fas fa-paper-plane ml-2"></i>
+                </button>
+            </form>
+            
+            <p class="text-sm text-gray-300 mt-4">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">ЛДПР</h3>
+                    <p class="text-gray-400">Либерально-Демократическая Партия России. Официальный сайт.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Разделы</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">О партии</a></li>
+                        <li><a href="#history" class="text-gray-400 hover:text-white transition">История</a></li>
+                        <li><a href="#leaders" class="text-gray-400 hover:text-white transition">Лидеры</a></li>
+                        <li><a href="#achievements" class="text-gray-400 hover:text-white transition">Достижения</a></li>
+                        <li><a href="#principles" class="text-gray-400 hover:text-white transition">Принципы</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Ресурсы</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Новости</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Документы</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Фотоархив</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Видео</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Контакты</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>107045, Москва, Луков пер., д. 9</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3"></i>
+                            <span>+7 (495) 607-47-62</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3"></i>
+                            <span>info@ldpr.ru</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-3 md:mb-0">© 2023 ЛДПР. Все права защищены.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Политика конфиденциальности</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-ldpr-blue text-white w-12 h-12 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 flex items-center justify-center">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mobile Menu Toggle (placeholder functionality)
+        document.querySelector('.md\\:hidden').addEventListener('click', () => {
+            alert('Мобильное меню будет реализовано в полной версии сайта');
+        });
+        
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.timeline-item, .hover-scale');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Set initial state for animated elements
+        document.querySelectorAll('.timeline-item, .hover-scale').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>

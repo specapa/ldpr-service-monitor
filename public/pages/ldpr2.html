@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЛДПР | Цифровая платформа</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0057B7;
+            --primary-yellow: #FFD700;
+            --accent-red: #E63946;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F8FAFC;
+            color: #1E293B;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #1E3A8A 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 87, 183, 0.15);
+        }
+        
+        .glow-on-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .glow-on-hover:hover {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--primary-yellow);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-yellow); }
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        .interactive-map path {
+            transition: all 0.3s ease;
+            fill: #CBD5E1;
+        }
+        
+        .interactive-map path:hover {
+            fill: var(--primary-blue);
+            cursor: pointer;
+        }
+        
+        .active-region {
+            fill: var(--primary-yellow) !important;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Анимированная навигация -->
+    <header class="fixed w-full z-50">
+        <nav class="bg-white/90 backdrop-blur-md shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-20 items-center">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 flex items-center">
+                            <img class="h-10 w-auto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Emblem_of_the_Liberal_Democratic_Party_of_Russia.svg/1200px-Emblem_of_the_Liberal_Democratic_Party_of_Russia.svg.png" alt="ЛДПР">
+                            <span class="ml-3 text-xl font-bold bg-gradient-to-r from-blue-800 to-blue-600 bg-clip-text text-transparent">ЛДПР</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="#" class="text-gray-900 hover:text-blue-700 px-3 py-2 font-medium transition-all duration-300 border-b-2 border-transparent hover:border-blue-600">Главная</a>
+                        <a href="#" class="text-gray-900 hover:text-blue-700 px-3 py-2 font-medium transition-all duration-300 border-b-2 border-transparent hover:border-blue-600">О партии</a>
+                        <a href="#" class="text-gray-900 hover:text-blue-700 px-3 py-2 font-medium transition-all duration-300 border-b-2 border-transparent hover:border-blue-600">Сервисы</a>
+                        <a href="#" class="text-gray-900 hover:text-blue-700 px-3 py-2 font-medium transition-all duration-300 border-b-2 border-transparent hover:border-blue-600">Новости</a>
+                        <a href="#" class="text-gray-900 hover:text-blue-700 px-3 py-2 font-medium transition-all duration-300 border-b-2 border-transparent hover:border-blue-600">Контакты</a>
+                        
+                        <button class="ml-4 bg-gradient-to-r from-blue-700 to-blue-500 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition-all duration-300 glow-on-hover">
+                            Вступить
+                        </button>
+                    </div>
+                    
+                    <div class="md:hidden flex items-center">
+                        <button class="text-gray-900 focus:outline-none">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Герой-секция с параллакс эффектом -->
+    <section class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <div class="absolute inset-0 bg-black/30 z-10"></div>
+        <div class="absolute inset-0 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80')"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center py-20">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6">
+                <span class="typewriter">ЛДПР — Будущее России</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10">
+                Инновационная цифровая платформа для взаимодействия с партией. Все сервисы ЛДПР в одном месте.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#" class="bg-white text-blue-800 px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-all duration-300 text-lg flex items-center justify-center gap-2 glow-on-hover">
+                    <i class="fas fa-rocket"></i> Начать использование
+                </a>
+                <a href="#" class="bg-yellow-400 text-blue-900 px-8 py-4 rounded-full font-bold hover:bg-yellow-300 transition-all duration-300 text-lg flex items-center justify-center gap-2 glow-on-hover">
+                    <i class="fas fa-play-circle"></i> Смотреть видео
+                </a>
+            </div>
+            
+            <div class="mt-20 scroll-indicator">
+                <a href="#services" class="text-white animate-bounce inline-block">
+                    <i class="fas fa-chevron-down text-3xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Интерактивная карта региональных отделений -->
+    <section class="py-20 bg-white" id="map">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Наши отделения по всей стране</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Интерактивная карта региональных отделений ЛДПР. Нажмите на регион для получения информации.</p>
+            </div>
+            
+            <div class="relative">
+                <div class="interactive-map">
+                    <svg viewBox="0 0 1000 600" class="w-full h-auto">
+                        <!-- Упрощенная карта России с регионами -->
+                        <path d="M200,100 L300,150 L350,200 L400,180 L450,220 L500,200 L550,250 L600,230 L650,270 L700,250 L750,300 L800,280 L850,320 L900,300 L950,350 L1000,330 L950,400 L900,380 L850,420 L800,400 L750,450 L700,430 L650,470 L600,450 L550,500 L500,480 L450,520 L400,500 L350,550 L300,530 L250,580 L200,560 L150,600 L100,580 L50,550 L100,500 L150,450 L200,400 L150,350 L200,300 L150,250 L200,200 L150,150 Z" 
+                              data-region="central" 
+                              title="Центральный федеральный округ"></path>
+                        <!-- Добавьте другие регионы -->
+                    </svg>
+                </div>
+                
+                <div class="absolute top-0 right-0 bg-white p-6 rounded-xl shadow-xl w-80 hidden" id="region-info">
+                    <h3 class="text-xl font-bold mb-2" id="region-name">Название региона</h3>
+                    <p class="text-gray-600 mb-4" id="region-description">Информация о региональном отделении</p>
+                    <a href="#" class="text-blue-600 font-medium hover:underline">Подробнее →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Все сервисы ЛДПР в одном месте -->
+    <section class="py-20 bg-gray-50" id="services">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Все сервисы ЛДПР</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Единая цифровая платформа для взаимодействия с партией</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Карточка сервиса 1 -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-blue-800 to-blue-600 flex items-center justify-center">
+                        <i class="fas fa-users text-white text-6xl"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">Членство в партии</h3>
+                        <p class="text-gray-600 mb-6">Подайте заявку на вступление в ЛДПР онлайн. Отслеживайте статус заявки и получайте доступ к закрытым материалам.</p>
+                        <a href="#" class="inline-flex items-center text-blue-600 font-medium group">
+                            Перейти к сервису
+                            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Карточка сервиса 2 -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-yellow-600 to-yellow-400 flex items-center justify-center">
+                        <i class="fas fa-comments text-white text-6xl"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">Обратная связь</h3>
+                        <p class="text-gray-600 mb-6">Оставьте обращение к депутатам ЛДПР. Получите официальный ответ и отслеживайте статус рассмотрения.</p>
+                        <a href="#" class="inline-flex items-center text-blue-600 font-medium group">
+                            Перейти к сервису
+                            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Карточка сервиса 3 -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-red-600 to-red-400 flex items-center justify-center">
+                        <i class="fas fa-calendar-check text-white text-6xl"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">Мероприятия</h3>
+                        <p class="text-gray-600 mb-6">Просматривайте анонсы мероприятий ЛДПР, регистрируйтесь онлайн и получайте напоминания.</p>
+                        <a href="#" class="inline-flex items-center text-blue-600 font-medium group">
+                            Перейти к сервису
+                            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Карточка сервиса 4 -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-green-600 to-green-400 flex items-center justify-center">
+                        <i class="fas fa-book-open text-white text-6xl"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">Библиотека ЛДПР</h3>
+                        <p class="text-gray-600 mb-6">Доступ к архивам документов, программам партии, выступлениям лидеров и аналитическим материалам.</p>
+                        <a href="#" class="inline-flex items-center text-blue-600 font-medium group">
+                            Перейти к сервису
+                            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Карточка сервиса 5 -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-purple-600 to-purple-400 flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-6xl"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">Партийная школа</h3>
+                        <p class="text-gray-600 mb-6">Онлайн-курсы для членов партии и активистов. Повышайте политическую грамотность.</p>
+                        <a href="#" class="inline-flex items-center text-blue-600 font-medium group">
+                            Перейти к сервису
+                            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Карточка сервиса 6 -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-r from-indigo-600 to-indigo-400 flex items-center justify-center">
+                        <i class="fas fa-shopping-bag text-white text-6xl"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">Партийная атрибутика</h3>
+                        <p class="text-gray-600 mb-6">Официальный магазин с символикой ЛДПР. Заказывайте онлайн с доставкой по всей России.</p>
+                        <a href="#" class="inline-flex items-center text-blue-600 font-medium group">
+                            Перейти к сервису
+                            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Интерактивная статистика -->
+    <section class="py-20 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold mb-4">ЛДПР в цифрах</h2>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto">Реальные результаты работы партии по всей стране</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6">
+                    <div class="text-5xl font-bold mb-2 counter" data-target="450000">0</div>
+                    <div class="text-lg opacity-90">Членов партии</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-5xl font-bold mb-2 counter" data-target="85">0</div>
+                    <div class="text-lg opacity-90">Региональных отделений</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-5xl font-bold mb-2 counter" data-target="1200">0</div>
+                    <div class="text-lg opacity-90">Мероприятий ежегодно</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-5xl font-bold mb-2 counter" data-target="30">0</div>
+                    <div class="text-lg opacity-90">Лет истории</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Видео и трансляции -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Прямые трансляции и видеоархив</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Смотрите выступления лидеров партии, трансляции мероприятий и аналитические программы</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-gray-900 rounded-2xl overflow-hidden shadow-xl">
+                    <div class="relative pt-[56.25%]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-red-600 text-white text-xs px-2 py-1 rounded mr-3">LIVE</span>
+                            <span class="text-gray-400 text-sm">Сейчас в эфире</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Заседание фракции ЛДПР в Госдуме</h3>
+                        <p class="text-gray-400">Прямая трансляция заседания фракции ЛДПР в Государственной Думе РФ</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                            <div class="relative pt-[56.25%] bg-gray-200">
+                                <img src="https://ldpr.ru/upload/iblock/6e3/6e3c5a3a1c1a3d5b5e5a5a5a5a5a5a5.jpg" alt="Видео" class="absolute top-0 left-0 w-full h-full object-cover">
+                                <button class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/80 rounded-full w-16 h-16 flex items-center justify-center hover:bg-white transition">
+                                    <i class="fas fa-play text-blue-700 text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold mb-1">Выступление лидера партии</h3>
+                                <p class="text-sm text-gray-600">12 июня 2023</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                            <div class="relative pt-[56.25%] bg-gray-200">
+                                <img src="https://ldpr.ru/upload/iblock/4e3/4e3c5a3a1c1a3d5b5e5a5a5a5a5a5a5.jpg" alt="Видео" class="absolute top-0 left-0 w-full h-full object-cover">
+                                <button class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/80 rounded-full w-16 h-16 flex items-center justify-center hover:bg-white transition">
+                                    <i class="fas fa-play text-blue-700 text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold mb-1">Пресс-конференция по итогам выборов</h3>
+                                <p class="text-sm text-gray-600">15 мая 2023</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                            <div class="relative pt-[56.25%] bg-gray-200">
+                                <img src="https://ldpr.ru/upload/iblock/2e3/2e3c5a3a1c1a3d5b5e5a5a5a5a5a5a5.jpg" alt="Видео" class="absolute top-0 left-0 w-full h-full object-cover">
+                                <button class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/80 rounded-full w-16 h-16 flex items-center justify-center hover:bg-white transition">
+                                    <i class="fas fa-play text-blue-700 text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold mb-1">Документальный фильм "30 лет ЛДПР"</h3>
+                                <p class="text-sm text-gray-600">10 мая 2023</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                            <div class="relative pt-[56.25%] bg-gray-200">
+                                <img src="https://ldpr.ru/upload/iblock/1e3/1e3c5a3a1c1a3d5b5e5a5a5a5a5a5a5.jpg" alt="Видео" class="absolute top-0 left-0 w-full h-full object-cover">
+                                <button class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/80 rounded-full w-16 h-16 flex items-center justify-center hover:bg-white transition">
+                                    <i class="fas fa-play text-blue-700 text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold mb-1">Интервью с депутатом ЛДПР</h3>
+                                <p class="text-sm text-gray-600">5 мая 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <a href="#" class="inline-flex items-center text-blue-600 font-medium group">
+                            Смотреть все видео
+                            <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Мобильное приложение -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <h2 class="text-4xl font-extrabold text-gray-900 mb-6">Мобильное приложение ЛДПР</h2>
+                    <p class="text-xl text-gray-600 mb-8">Все сервисы партии теперь в вашем смартфоне. Скачайте официальное приложение ЛДПР и будьте всегда на связи.</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#" class="bg-gray-900 text-white px-6 py-3 rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-gray-800 transition">
+                            <i class="fab fa-apple text-2xl"></i>
+                            <div>
+                                <div class="text-xs">Download on the</div>
+                                <div class="text-lg">App Store</div>
+                            </div>
+                        </a>
+                        
+                        <a href="#" class="bg-gray-900 text-white px-6 py-3 rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-gray-800 transition">
+                            <i class="fab fa-google-play text-2xl"></i>
+                            <div>
+                                <div class="text-xs">Get it on</div>
+                                <div class="text-lg">Google Play</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 relative">
+                    <div class="floating">
+                        <img src="https://cdn.dribbble.com/users/1787323/screenshots/14267644/media/2f139556d71f9e429e5a9eab8c4a0a7e.png" alt="Мобильное приложение" class="max-w-full h-auto rounded-2xl shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал сайта -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <img class="h-10 w-auto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Emblem_of_the_Liberal_Democratic_Party_of_Russia.svg/1200px-Emblem_of_the_Liberal_Democratic_Party_of_Russia.svg.png" alt="ЛДПР">
+                        <span class="ml-3 text-xl font-bold">ЛДПР</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Либерально-Демократическая Партия России — партия патриотов, выступающая за сильную и независимую Россию.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-vk text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-odnoklassniki text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Разделы</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Главная</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">О партии</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Новости</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Депутаты</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Программа</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Сервисы</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Членство в партии</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Обратная связь</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Мероприятия</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Библиотека</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Партийная школа</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Контакты</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-gray-400"></i>
+                            <span class="text-gray-400">107045, Москва, Луков пер., д. 9</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-gray-400"></i>
+                            <span class="text-gray-400">+7 (495) 785-58-58</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-gray-400"></i>
+                            <span class="text-gray-400">info@ldpr.ru</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2023 ЛДПР. Все права защищены.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">Политика конфиденциальности</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Анимация счетчиков
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / speed;
+                
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+        
+        // Показываем счетчики при скролле
+        function checkCounters() {
+            const countersSection = document.querySelector('.bg-gradient-to-r');
+            const sectionPosition = countersSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (sectionPosition < screenPosition) {
+                animateCounters();
+                window.removeEventListener('scroll', checkCounters);
+            }
+        }
+        
+        // Интерактивная карта
+        function setupMap() {
+            const paths = document.querySelectorAll('.interactive-map path');
+            const regionInfo = document.getElementById('region-info');
+            
+            paths.forEach(path => {
+                path.addEventListener('click', function() {
+                    // Удаляем активный класс у всех регионов
+                    paths.forEach(p => p.classList.remove('active-region'));
+                    
+                    // Добавляем активный класс текущему региону
+                    this.classList.add('active-region');
+                    
+                    // Обновляем информацию о регионе
+                    const regionName = this.getAttribute('title');
+                    document.getElementById('region-name').textContent = regionName;
+                    document.getElementById('region-description').textContent = `Информация о региональном отделении ЛДПР в ${regionName}`;
+                    
+                    // Показываем блок с информацией
+                    regionInfo.style.display = 'block';
+                });
+            });
+        }
+        
+        // Плавный скролл
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Инициализация при загрузке страницы
+        window.addEventListener('load', function() {
+            setupMap();
+            window.addEventListener('scroll', checkCounters);
+        });
+        
+        // Анимация для мобильного меню
+        document.querySelector('.md\\:hidden button').addEventListener('click', function() {
+            const nav = document.querySelector('.hidden.md\\:flex');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('flex');
+        });
+    </script>
+</body>
+</html>

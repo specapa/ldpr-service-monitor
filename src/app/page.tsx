@@ -1,103 +1,178 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import Card from '@/app/components/Card';
+import Header from '@/app/components/Header';
+import ButtonMoreServ from './components/ButtonMoreServices';
+
+interface LinkBlockProps {
+  title: string;
+  description: string;
+  href: string;
+}
+
+const LinkBlock: React.FC<LinkBlockProps> = ({ title, description, href }) => (
+  <Link href={href}>
+    <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+      <h3 className="text-xl font-semibold text-blue-600 mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+    </div>
+  </Link>
+);
+
+const LdprPage: React.FC = () => {
+  const router = useRouter();
+
+  const services = {
+    study: [
+      {
+        title: 'Обращение в приёмную ЛДПР',
+        description: 'Решение вопросов ЖКХ, защита прав, юридическая помощь без бюрократии',
+        iconPath: 'icons/favicon.ico',
+        buttonText: 'Оставить обращение',
+        link: 'https://ldpr.ru/treatment',
+      },
+      {
+        title: 'Новости и аналитика',
+        description: 'События страны через призму честного взгляда ЛДПР',
+        iconPath: 'icons/favicon.ico',
+        buttonText: 'Читать',
+        link: '/pages/ldpr.html',
+      },
+      {
+        title: 'История партии',
+        description: 'История ЛДПР',
+        iconPath: 'icons/favicon.ico',
+        buttonText: 'Подробнее',
+        link: 'pages/ldpr-history.html',
+      },
+    ],
+    mp: [
+      {
+        title: 'События ЛДПР',
+        description: 'Интерактивная карта событий партии',
+        iconPath: 'icons/favicon.ico',
+        buttonText: 'Изучить',
+        link: 'pages/ldpr-map.html',
+      },
+      {
+        title: 'Первый хакатон ЛДПР',
+        description: 'Первый хакатон ЛДПР',
+        iconPath: 'icons/favicon.ico',
+        buttonText: 'Изучить',
+        link: 'pages/ldpr-map.html',
+      },
+    ],
+    services: [
+      {
+        title: 'Налоговый калькулятор',
+        description: 'Узнайте как изменится ваша жизнь благодаря нашим решениям',
+        iconPath: 'icons/favicon.ico',
+        buttonText: 'Узнать',
+        link: 'pages/ldpr-calc.html',
+      },
+      {
+        title: 'ЛДПР: Достижения для России',
+        description: 'Интерактивная карта ключевых решений',
+        iconPath: 'icons/favicon.ico',
+        buttonText: 'Смотреть',
+        link: '/pages/ldpr-d-map.html',
+      },
+    ],
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      <main className="max-w-6xl mx-auto px-4 py-12">
+        <section className="mb-16 text-center">
+          <p className="text-background mb-6">
+            Мы стоим на страже интересов каждого гражданина России. Наш сайт — ваш личный помощник
+            и прямой канал связи с партией.
+          </p>
+          <h2 className="text-3xl font-bold text-blue-800 mb-8">
+            Сервисы ЛДПР для вас
+          </h2>
+        </section>
+
+        {/* ОБРАЗОВАНИЕ */}
+        <h2 className="text-2xl font-bold text-black mb-4">ОБРАЗОВАНИЕ</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {services.study.map((service, index) => (
+            <Card
+              key={index}
+              iconPath={service.iconPath}
+              title={service.title}
+              description={service.description}
+              buttonText={service.buttonText}
+              onButtonClick={() => router.push(service.link)}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          ))}
+          <div className="justify-center items-center flex col-start-2">
+            <ButtonMoreServ label="Смотреть больше" onClick={() => console.log('Иди!')} />
+          </div>
         </div>
+
+        {/* МЕРОПРИЯТИЯ */}
+        <h2 className="text-2xl font-bold text-black mb-4">МЕРОПРИЯТИЯ</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {services.mp.map((service, index) => (
+            <Card
+              key={index}
+              iconPath={service.iconPath}
+              title={service.title}
+              description={service.description}
+              buttonText={service.buttonText}
+              onButtonClick={() => router.push(service.link)}
+            />
+          ))}
+          <div className="justify-center items-center flex col-start-2">
+            <ButtonMoreServ label="Показать ещё" onClick={() => console.log('Иди!')} />
+          </div>
+        </div>
+
+        {/* СЕРВИСЫ */}
+        <h2 className="text-2xl font-bold text-black mb-4">СЕРВИСЫ</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {services.services.map((service, index) => (
+            <Card
+              key={index}
+              iconPath={service.iconPath}
+              title={service.title}
+              description={service.description}
+              buttonText={service.buttonText}
+              onButtonClick={() => router.push(service.link)}
+            />
+          ))}
+          <div className="justify-center items-center flex col-start-2">
+            <ButtonMoreServ label="Больше сервисов" onClick={() => console.log('Иди!')} />
+          </div>
+        </div>
+
+        {/* Дополнительный блок */}
+        <section className="space-y-8">
+          <div className="bg-blue-50 p-8 rounded-xl">
+            <h2 className="text-2xl font-bold text-blue-800 mb-4">
+              ЛДПР — за справедливость и сильную Россию!
+            </h2>
+            <p className="text-background">
+              Мы боремся против беззакония и чиновничьего произвола. Защищаем ваши интересы
+              в Государственной Думе и региональных парламентах.
+            </p>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="bg-background text-foreground py-4 mt-12 justify-center items-center">
+        <div className="container mx-auto px-4 text-foreground text-center">
+          <p>© ЛДПР {new Date().getFullYear()}. Все права защищены</p>
+        </div>
       </footer>
     </div>
   );
-}
+};
+
+export default LdprPage;

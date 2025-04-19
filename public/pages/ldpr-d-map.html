@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЛДПР: Достижения для России</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+        }
+        #canvas-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .info-panel {
+            position: absolute;
+            right: -400px;
+            top: 50px;
+            width: 350px;
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: right 0.5s ease;
+            z-index: 100;
+        }
+        .info-panel.active {
+            right: 50px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: color 0.3s;
+        }
+        .close-btn:hover {
+            color: white;
+        }
+        .node-tooltip {
+            position: absolute;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+        .title {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            z-index: 10;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+        }
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .glow {
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    
+    <div class="title">
+        <h1 class="text-4xl font-bold mb-2">ЛДПР: Достижения для России</h1>
+        <p class="text-blue-200">Интерактивная карта ключевых решений</p>
+    </div>
+    
+    <div class="info-panel">
+        <div class="close-btn">
+            <i class="fas fa-times"></i>
+        </div>
+        <h2 class="text-2xl font-bold mb-4" id="panel-title">Выберите достижение</h2>
+        <div class="text-gray-300 mb-4" id="panel-description">
+            Нажмите на любой из узлов на карте, чтобы узнать подробности о достижениях ЛДПР для России.
+        </div>
+        <div class="flex items-center text-yellow-400 mb-3" id="panel-impact">
+            <i class="fas fa-bolt mr-2"></i>
+            <span>Влияние на страну</span>
+        </div>
+        <div class="flex items-center text-blue-400 mb-3" id="panel-date">
+            <i class="far fa-calendar-alt mr-2"></i>
+            <span>Год реализации</span>
+        </div>
+        <div class="border-t border-gray-700 pt-4 mt-4" id="panel-details">
+            <h3 class="font-bold mb-2">Детали:</h3>
+            <p class="text-sm text-gray-300">Здесь будет дополнительная информация о выбранном достижении.</p>
+        </div>
+    </div>
+    
+    <div class="node-tooltip"></div>
+    
+    <div class="controls">
+        <div class="control-btn" id="reset-btn">
+            <i class="fas fa-sync-alt mr-2"></i>Сбросить вид
+        </div>
+        <div class="control-btn" id="auto-rotate-btn">
+            <i class="fas fa-rotate mr-2"></i>Автоповорот
+        </div>
+    </div>
+
+    <script>
+        // Инициализация Three.js
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setClearColor(0x0f172a, 1);
+        container.appendChild(renderer.domElement);
+        
+        // Добавляем освещение
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+        
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight);
+        
+        const pointLight = new THREE.PointLight(0x1e90ff, 2, 50);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+        
+        // Создаем центральный узел
+        const centralGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+        const centralMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0x1e40af,
+            emissive: 0x1e40af,
+            emissiveIntensity: 0.3,
+            shininess: 100
+        });
+        const centralNode = new THREE.Mesh(centralGeometry, centralMaterial);
+        scene.add(centralNode);
+        
+        // Добавляем текстуру с логотипом ЛДПР на центральный узел
+        const loader = new THREE.TextureLoader();
+        loader.load('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Emblem_of_LDPR.svg/1200px-Emblem_of_LDPR.svg.png', function(texture) {
+            const logoMaterial = new THREE.MeshPhongMaterial({ 
+                map: texture,
+                transparent: true,
+                opacity: 0.9,
+                emissive: 0x1e40af,
+                emissiveIntensity: 0.2
+            });
+            const logoGeometry = new THREE.PlaneGeometry(2, 2);
+            const logo = new THREE.Mesh(logoGeometry, logoMaterial);
+            logo.position.set(0, 0, 1.51);
+            logo.rotation.y = Math.PI;
+            centralNode.add(logo);
+        });
+        
+        // Данные о достижениях ЛДПР
+        const achievements = [
+            {
+                id: 1,
+                title: "Социальная поддержка",
+                description: "Инициативы по увеличению пенсий и социальных выплат для уязвимых слоев населения.",
+                impact: "Высокий",
+                date: "2018-2023",
+                details: "ЛДПР активно выступала за индексацию пенсий выше уровня инфляции и увеличение минимального размера оплаты труда.",
+                color: 0xff6b6b,
+                position: { x: -5, y: 2, z: 0 }
+            },
+            {
+                id: 2,
+                title: "Образование и наука",
+                description: "Программы поддержки российских вузов и научных исследований.",
+                impact: "Средний",
+                date: "2016-2022",
+                details: "Фракция ЛДПР инициировала увеличение финансирования фундаментальной науки и поддержку молодых ученых.",
+                color: 0x4ecdc4,
+                position: { x: 4, y: 3, z: -2 }
+            },
+            {
+                id: 3,
+                title: "Здравоохранение",
+                description: "Реформы системы здравоохранения и доступность медицины.",
+                impact: "Высокий",
+                date: "2019-2023",
+                details: "ЛДПР предложила меры по улучшению лекарственного обеспечения и модернизации сельских больниц.",
+                color: 0x45aaf2,
+                position: { x: 3, y: -1, z: 4 }
+            },
+            {
+                id: 4,
+                title: "Экономический рост",
+                description: "Стимулирование малого и среднего бизнеса.",
+                impact: "Высокий",
+                date: "2017-2021",
+                details: "Снижение налоговой нагрузки и упрощение административных процедур для предпринимателей.",
+                color: 0xa55eea,
+                position: { x: -2, y: -3, z: -5 }
+            },
+            {
+                id: 5,
+                title: "Оборона и безопасность",
+                description: "Укрепление обороноспособности страны.",
+                impact: "Критический",
+                date: "2014-2023",
+                details: "Поддержка модернизации армии и повышения социального статуса военнослужащих.",
+                color: 0xf7b731,
+                position: { x: -4, y: 0, z: 6 }
+            },
+            {
+                id: 6,
+                title: "Международные отношения",
+                description: "Защита российских интересов на международной арене.",
+                impact: "Высокий",
+                date: "2014-2023",
+                details: "Последовательная позиция по защите суверенитета России и отстаиванию национальных интересов.",
+                color: 0x20bf6b,
+                position: { x: 6, y: 2, z: 3 }
+            }
+        ];
+        
+        // Создаем узлы достижений
+        const nodes = [];
+        const lines = [];
+        
+        achievements.forEach(achievement => {
+            const geometry = new THREE.SphereGeometry(0.8, 32, 32);
+            const material = new THREE.MeshPhongMaterial({ 
+                color: achievement.color,
+                emissive: achievement.color,
+                emissiveIntensity: 0.2,
+                shininess: 50
+            });
+            const node = new THREE.Mesh(geometry, material);
+            node.position.set(achievement.position.x, achievement.position.y, achievement.position.z);
+            node.userData = achievement;
+            scene.add(node);
+            nodes.push(node);
+            
+            // Создаем соединительные линии
+            const lineGeometry = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(0, 0, 0),
+                new THREE.Vector3(
+                    achievement.position.x,
+                    achievement.position.y,
+                    achievement.position.z
+                )
+            ]);
+            const lineMaterial = new THREE.LineBasicMaterial({ 
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.3
+            });
+            const line = new THREE.Line(lineGeometry, lineMaterial);
+            scene.add(line);
+            lines.push(line);
+            
+            // Добавляем иконки к узлам
+            const iconGeometry = new THREE.PlaneGeometry(1, 1);
+            let iconPath = '';
+            switch(achievement.id) {
+                case 1: iconPath = 'fas fa-hand-holding-heart'; break;
+                case 2: iconPath = 'fas fa-graduation-cap'; break;
+                case 3: iconPath = 'fas fa-heartbeat'; break;
+                case 4: iconPath = 'fas fa-chart-line'; break;
+                case 5: iconPath = 'fas fa-shield-alt'; break;
+                case 6: iconPath = 'fas fa-globe-europe'; break;
+            }
+            
+            const iconMaterial = new THREE.MeshBasicMaterial({ 
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.9,
+                side: THREE.DoubleSide
+            });
+            const icon = new THREE.Mesh(iconGeometry, iconMaterial);
+            icon.position.set(
+                achievement.position.x,
+                achievement.position.y + 1.2,
+                achievement.position.z
+            );
+            icon.rotation.x = -Math.PI / 4;
+            icon.userData = { type: 'icon', path: iconPath };
+            scene.add(icon);
+        });
+        
+        // Позиция камеры
+        camera.position.z = 15;
+        
+        // Переменные для управления
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        let autoRotate = false;
+        let rotationSpeed = 0.005;
+        let targetRotation = { x: 0, y: 0 };
+        let currentRotation = { x: 0, y: 0 };
+        let selectedNode = null;
+        
+        // Обработчики событий мыши
+        container.addEventListener('mousedown', (event) => {
+            isDragging = true;
+            previousMousePosition = { 
+                x: event.clientX, 
+                y: event.clientY 
+            };
+        });
+        
+        container.addEventListener('mousemove', (event) => {
+            if (isDragging) {
+                autoRotate = false;
+                document.getElementById('auto-rotate-btn').classList.remove('bg-blue-500');
+                
+                const deltaMove = {
+                    x: event.clientX - previousMousePosition.x,
+                    y: event.clientY - previousMousePosition.y
+                };
+                
+                targetRotation.y += deltaMove.x * 0.01;
+                targetRotation.x += deltaMove.y * 0.01;
+                
+                previousMousePosition = {
+                    x: event.clientX,
+                    y: event.clientY
+                };
+            }
+            
+            // Проверка наведения на узел
+            const mouse = new THREE.Vector2(
+                (event.clientX / window.innerWidth) * 2 - 1,
+                -(event.clientY / window.innerHeight) * 2 + 1
+            );
+            
+            const raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(mouse, camera);
+            
+            const intersects = raycaster.intersectObjects(nodes);
+            
+            if (intersects.length > 0) {
+                const tooltip = document.querySelector('.node-tooltip');
+                tooltip.style.left = `${event.clientX + 15}px`;
+                tooltip.style.top = `${event.clientY + 15}px`;
+                tooltip.textContent = intersects[0].object.userData.title;
+                tooltip.style.opacity = '1';
+                
+                // Подсветка узла
+                nodes.forEach(node => {
+                    node.material.emissiveIntensity = node === intersects[0].object ? 0.8 : 0.2;
+                });
+            } else {
+                document.querySelector('.node-tooltip').style.opacity = '0';
+                nodes.forEach(node => {
+                    node.material.emissiveIntensity = 0.2;
+                });
+            }
+        });
+        
+        container.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+        
+        container.addEventListener('click', (event) => {
+            const mouse = new THREE.Vector2(
+                (event.clientX / window.innerWidth) * 2 - 1,
+                -(event.clientY / window.innerHeight) * 2 + 1
+            );
+            
+            const raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(mouse, camera);
+            
+            const intersects = raycaster.intersectObjects(nodes);
+            
+            if (intersects.length > 0) {
+                const achievement = intersects[0].object.userData;
+                showInfoPanel(achievement);
+                
+                // Анимация выбранного узла
+                if (selectedNode) {
+                    gsap.to(selectedNode.scale, { x: 1, y: 1, z: 1, duration: 0.3 });
+                    selectedNode.material.color.setHex(selectedNode.userData.color);
+                }
+                
+                selectedNode = intersects[0].object;
+                gsap.to(selectedNode.scale, { x: 1.2, y: 1.2, z: 1.2, duration: 0.3 });
+                selectedNode.material.color.setHex(0xffffff);
+                
+                // Анимация камеры для приближения к узлу
+                const targetPosition = {
+                    x: selectedNode.position.x * 0.7,
+                    y: selectedNode.position.y * 0.7,
+                    z: selectedNode.position.z * 0.7 + 5
+                };
+                
+                gsap.to(camera.position, {
+                    x: targetPosition.x,
+                    y: targetPosition.y,
+                    z: targetPosition.z,
+                    duration: 1
+                });
+                
+                // Поворот камеры к узлу
+                targetRotation.y = Math.atan2(
+                    selectedNode.position.x - camera.position.x,
+                    selectedNode.position.z - camera.position.z
+                );
+                targetRotation.x = Math.atan2(
+                    selectedNode.position.y - camera.position.y,
+                    Math.sqrt(
+                        Math.pow(selectedNode.position.x - camera.position.x, 2) +
+                        Math.pow(selectedNode.position.z - camera.position.z, 2)
+                    )
+                );
+            }
+        });
+        
+        // Обработчики кнопок управления
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            autoRotate = false;
+            document.getElementById('auto-rotate-btn').classList.remove('bg-blue-500');
+            
+            gsap.to(camera.position, { 
+                x: 0, 
+                y: 0, 
+                z: 15, 
+                duration: 1 
+            });
+            
+            targetRotation = { x: 0, y: 0 };
+            
+            if (selectedNode) {
+                gsap.to(selectedNode.scale, { x: 1, y: 1, z: 1, duration: 0.3 });
+                selectedNode.material.color.setHex(selectedNode.userData.color);
+                selectedNode = null;
+            }
+            
+            document.querySelector('.info-panel').classList.remove('active');
+        });
+        
+        document.getElementById('auto-rotate-btn').addEventListener('click', () => {
+            autoRotate = !autoRotate;
+            if (autoRotate) {
+                document.getElementById('auto-rotate-btn').classList.add('bg-blue-500', 'pulse');
+            } else {
+                document.getElementById('auto-rotate-btn').classList.remove('bg-blue-500', 'pulse');
+            }
+        });
+        
+        // Закрытие информационной панели
+        document.querySelector('.close-btn').addEventListener('click', () => {
+            document.querySelector('.info-panel').classList.remove('active');
+            
+            if (selectedNode) {
+                gsap.to(selectedNode.scale, { x: 1, y: 1, z: 1, duration: 0.3 });
+                selectedNode.material.color.setHex(selectedNode.userData.color);
+                selectedNode = null;
+            }
+        });
+        
+        // Функция показа информационной панели
+        function showInfoPanel(achievement) {
+            document.getElementById('panel-title').textContent = achievement.title;
+            document.getElementById('panel-description').textContent = achievement.description;
+            document.getElementById('panel-impact').innerHTML = `<i class="fas fa-bolt mr-2"></i><span>Влияние: ${achievement.impact}</span>`;
+            document.getElementById('panel-date').innerHTML = `<i class="far fa-calendar-alt mr-2"></i><span>${achievement.date}</span>`;
+            document.getElementById('panel-details').innerHTML = `<h3 class="font-bold mb-2">Детали:</h3><p class="text-sm text-gray-300">${achievement.details}</p>`;
+            
+            document.querySelector('.info-panel').classList.add('active');
+        }
+        
+        // Анимация
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Плавное вращение
+            currentRotation.y += (targetRotation.y - currentRotation.y) * 0.05;
+            currentRotation.x += (targetRotation.x - currentRotation.x) * 0.05;
+            
+            if (autoRotate) {
+                targetRotation.y += rotationSpeed;
+            }
+            
+            // Вращение центрального узла
+            centralNode.rotation.y += 0.005;
+            
+            // Вращение сцены
+            scene.rotation.set(currentRotation.x, currentRotation.y, 0);
+            
+            // Мерцание соединительных линий
+            lines.forEach(line => {
+                line.material.opacity = 0.3 + Math.sin(Date.now() * 0.001) * 0.1;
+            });
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Обработчик изменения размера окна
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        animate();
+    </script>
+</body>
+</html>

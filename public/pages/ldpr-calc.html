@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Налоговый калькулятор ЛДПР для бизнеса</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .header {
+            background-color: #005baa;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #ffcc00;
+            color: #333;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #e6b800;
+        }
+        .results {
+            margin-top: 30px;
+            display: none;
+        }
+        .result-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .current {
+            border-left: 4px solid #999;
+        }
+        .ldpr {
+            border-left: 4px solid #005baa;
+        }
+        h2 {
+            color: #005baa;
+            margin-top: 0;
+        }
+        h3 {
+            margin-top: 0;
+        }
+        .savings {
+            font-size: 18px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+        .reform-list {
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+        .reform-list li {
+            margin-bottom: 8px;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .header {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">ЛДПР</div>
+        <h1>Налоговый калькулятор для бизнеса</h1>
+        <p>Узнайте, как реформы ЛДПР могут снизить вашу налоговую нагрузку</p>
+    </div>
+
+    <div class="container">
+        <div class="form-group">
+            <label for="businessType">Тип бизнеса:</label>
+            <select id="businessType">
+                <option value="usn6">УСН 6% (доходы)</option>
+                <option value="usn15">УСН 15% (доходы минус расходы)</option>
+                <option value="patent">Патент</option>
+                <option value="osno">ОСНО</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="income">Годовой доход (руб):</label>
+            <input type="number" id="income" placeholder="Введите ваш доход">
+        </div>
+
+        <div class="form-group" id="expensesGroup" style="display: none;">
+            <label for="expenses">Годовые расходы (руб):</label>
+            <input type="number" id="expenses" placeholder="Введите ваши расходы">
+        </div>
+
+        <div class="form-group">
+            <label for="employees">Количество сотрудников:</label>
+            <input type="number" id="employees" placeholder="Введите количество" value="0">
+        </div>
+
+        <button onclick="calculateTax()">Рассчитать</button>
+
+        <div id="results" class="results">
+            <h2>Результаты расчета</h2>
+
+            <div class="result-card current">
+                <h3>Текущая система</h3>
+                <p>Налоговая нагрузка: <span id="currentTax">0</span> руб/год</p>
+                <p>Страховые взносы: <span id="currentFees">0</span> руб/год</p>
+                <p>Общая нагрузка: <span id="currentTotal">0</span> руб/год</p>
+            </div>
+
+            <div class="result-card ldpr">
+                <h3>По программе ЛДПР</h3>
+                <p>Налоговая нагрузка: <span id="ldprTax">0</span> руб/год</p>
+                <p>Страховые взносы: <span id="ldprFees">0</span> руб/год</p>
+                <p>Общая нагрузка: <span id="ldprTotal">0</span> руб/год</p>
+                <p class="savings">Ваша экономия: <span id="savings">0</span> руб/год</p>
+            </div>
+
+            <div class="reforms">
+                <h3>Предлагаемые реформы ЛДПР:</h3>
+                <ul class="reform-list" id="reformsList">
+                    <!-- Сюда добавим предложения -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 ЛДПР. Все права защищены.</p>
+        <p>Калькулятор носит информационный характер.</p>
+    </div>
+
+    <script>
+        document.getElementById('businessType').addEventListener('change', function() {
+            const expensesGroup = document.getElementById('expensesGroup');
+            if (this.value === 'usn15') {
+                expensesGroup.style.display = 'block';
+            } else {
+                expensesGroup.style.display = 'none';
+            }
+        });
+
+        function calculateTax() {
+            // Получаем введенные данные
+            const businessType = document.getElementById('businessType').value;
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+            const employees = parseInt(document.getElementById('employees').value) || 0;
+
+            // Расчет по текущей системе
+            let currentTax = 0;
+            let currentFees = employees * 45000 * 12 * 0.3; // Примерные страховые взносы
+
+            switch(businessType) {
+                case 'usn6':
+                    currentTax = income * 0.06;
+                    break;
+                case 'usn15':
+                    currentTax = (income - expenses) * 0.15;
+                    if (currentTax < income * 0.01) currentTax = income * 0.01; // Минимальный налог
+                    break;
+                case 'patent':
+                    currentTax = income > 0 ? Math.min(60000, income * 0.06) : 0;
+                    break;
+                case 'osno':
+                    currentTax = (income - expenses) * 0.2;
+                    break;
+            }
+
+            // Расчет по программе ЛДПР
+            let ldprTax = 0;
+            let reforms = [];
+
+            switch(businessType) {
+                case 'usn6':
+                    ldprTax = income * 0.04; // Снижение ставки с 6% до 4%
+                    reforms = [
+                        "Снижение ставки УСН 'доходы' с 6% до 4%",
+                        "Отмена минимального налога для УСН 'доходы минус расходы'",
+                        "Увеличение лимита для применения УСН до 250 млн руб."
+                    ];
+                    break;
+                case 'usn15':
+                    {
+                        const tax = (income - expenses) * 0.1; // Снижение ставки с 15% до 10%
+                        ldprTax = tax > 0 ? tax : 0; // Отмена минимального налога
+                        reforms = [
+                            "Снижение ставки УСН 'доходы минус расходы' с 15% до 10%",
+                            "Отмена минимального налога для УСН 'доходы минус расходы'",
+                            "Увеличение лимита для применения УСН до 250 млн руб.",
+                            "Расширение перечня учитываемых расходов"
+                        ];
+                    }
+                    break;
+                case 'patent':
+                    ldprTax = income > 0 ? Math.min(30000, income * 0.03) : 0; // Снижение стоимости патента
+                    reforms = [
+                        "Снижение стоимости патента на 50%",
+                        "Увеличение предельного дохода для ПСН до 120 млн руб.",
+                        "Расширение видов деятельности для ПСН"
+                    ];
+                    break;
+                case 'osno':
+                    ldprTax = (income - expenses) * 0.15; // Снижение ставки налога на прибыль
+                    reforms = [
+                        "Снижение ставки налога на прибыль с 20% до 15% для малого бизнеса",
+                        "Упрощение НДС-отчетности для малых предприятий",
+                        "Введение налоговых каникул для новых предприятий"
+                    ];
+                    break;
+            }
+
+            // Снижение страховых взносов по программе ЛДПР
+            const ldprFees = currentFees * 0.7; // Снижение на 30%
+            reforms.push("Снижение страховых взносов для малого бизнеса на 30%");
+
+            // Выводим результаты
+            document.getElementById('currentTax').textContent = Math.round(currentTax).toLocaleString();
+            document.getElementById('currentFees').textContent = Math.round(currentFees).toLocaleString();
+            document.getElementById('currentTotal').textContent = Math.round(currentTax + currentFees).toLocaleString();
+
+            document.getElementById('ldprTax').textContent = Math.round(ldprTax).toLocaleString();
+            document.getElementById('ldprFees').textContent = Math.round(ldprFees).toLocaleString();
+            document.getElementById('ldprTotal').textContent = Math.round(ldprTax + ldprFees).toLocaleString();
+
+            const savings = (currentTax + currentFees) - (ldprTax + ldprFees);
+            document.getElementById('savings').textContent = Math.round(savings).toLocaleString();
+
+            // Выводим предлагаемые реформы
+            const reformsList = document.getElementById('reformsList');
+            reformsList.innerHTML = '';
+            reforms.forEach(reform => {
+                const li = document.createElement('li');
+                li.textContent = reform;
+                reformsList.appendChild(li);
+            });
+
+            // Показываем результаты
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
