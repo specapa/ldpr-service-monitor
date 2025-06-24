@@ -17,31 +17,34 @@ const Card = ({
   onButtonClick,
 }: CardProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 space-y-4 max-w-xs justify-center flex flex-col">
-      {/* Первая строка: Иконка и Заголовок */}
-      <div className="flex items-center gap-2">
-        <Image 
-          src={`/${iconPath}`} // Путь относительно папки public
-          alt="ico"
-          width={48}
-          height={48}
-          className="h-6 w-6"
-        />
-        <h3 className="font-bold text-lg text-black">{title}</h3>
+    <div className="flex flex-col justify-between h-full p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-transform hover:-translate-y-1 duration-300 border border-gray-200">
+      {/* Верхняя часть: иконка + заголовок */}
+      <div className="flex items-start gap-4 mb-4">
+        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center overflow-hidden">
+          <Image
+            src={`/${iconPath}`}
+            alt="Иконка"
+            width={48}
+            height={48}
+            className="w-full h-full object-contain"
+          />
+        </div>
+        <h3 className="font-semibold text-xl text-gray-800 break-words leading-snug">
+          {title}
+        </h3>
       </div>
 
-      {/* Вторая строка: Описание */}
-      <p className="text-gray-600 text-sm">{description}</p>
 
-      {/* Третья строка: Кнопка */}
-      <div className="mt-2">
-        <button
-          onClick={onButtonClick}
-          className="bg-background hover:bg-blue-600 text-foreground px-4 py-2 rounded transition-colors text-sm"
-        >
-          {buttonText}
-        </button>
-      </div>
+      {/* Описание */}
+      <p className="text-gray-600 text-sm flex-grow mb-6">{description}</p>
+
+      {/* Кнопка */}
+      <button
+        onClick={onButtonClick}
+        className="mt-auto w-full px-4 py-2 text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-md transition duration-200"
+      >
+        {buttonText}
+      </button>
     </div>
   );
 };
